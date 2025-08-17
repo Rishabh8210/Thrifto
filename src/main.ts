@@ -5,8 +5,10 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Handling cors for frontend
-  app.enableCors()
+  // Enable CORS with wildcard origin (consider restricting this in production)
+  app.enableCors({
+    origin: true
+  })
 
   // Adding validation pipe
   app.useGlobalPipes(new ValidationPipe({
@@ -14,6 +16,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true
   }))
+
+  // Adding prefix 'api' urls
+  app.setGlobalPrefix('api')
 
   await app.listen(process.env.PORT ?? 3000);
 }

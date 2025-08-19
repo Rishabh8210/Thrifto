@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import serverConfig from './common/configs/server.config';
+import serverConfig from './configs/server.config';
 
 @Module({
   imports: [

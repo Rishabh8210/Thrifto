@@ -7,18 +7,18 @@ export class Users {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
-    @Column()
+    @Column({ unique: true })
     phone: string;
 
     @Column()
     password: string;
 
-    @Column()
+    @Column({ default: false })
     isVerified: boolean;
 
-    @Column()
+    @Column({ default: 0 })
     totalAmount: number;
 }

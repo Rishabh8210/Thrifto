@@ -7,6 +7,7 @@ import serverConfig from './configs/server.config';
 import typeormConfig from './configs/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
+import { BcryptService } from './common/utils/bcrypt.service';
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { ConfigType } from '@nestjs/config';
     UsersModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, BcryptService],
 })
 export class AppModule {}

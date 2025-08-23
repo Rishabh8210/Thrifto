@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import serverConfig from './configs/server.config';
-
+import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -22,9 +21,11 @@ async function bootstrap() {
   app.setGlobalPrefix('api')
 
   // Get port from environment variables or use default
-  const appConfig = app.get(serverConfig);
+  const appConfig = app.get(ConfigService);
   const port = appConfig.get('PORT') || 3000;
 
-  await app.listen(port);
+  await app.listen(port, () => {
+    console.log(`Server is running at PORT ${port}`);
+  });
 }
 bootstrap();

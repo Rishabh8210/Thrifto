@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm'
-
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 @Entity()
 export class Users {
     @PrimaryGeneratedColumn()
@@ -12,8 +11,14 @@ export class Users {
     email: string;
 
     @Column()
+    phone: string;
+
+    @Column()
     password: string;
 
     @Column()
-    username: string;
+    isVerified: boolean;
+
+    @Column()
+    totalAmount: number;
 }

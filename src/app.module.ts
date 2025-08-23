@@ -8,6 +8,7 @@ import typeormConfig from './configs/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
 import { BcryptService } from './common/utils/bcrypt.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { BcryptService } from './common/utils/bcrypt.service';
         }
       )
     }),
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService],

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import bcrypt from 'bcrypt'
 
@@ -21,8 +21,12 @@ export class BcryptService {
      * @returns Promise<string> - The hashed password
      */
     async hashPassword(password: string): Promise<string> {
-        const salt = await bcrypt.genSalt(this.saltRound);
-        return bcrypt.hash(password, salt)
+        try {
+            const salt = await bcrypt.genSalt(this.saltRound);
+            return bcrypt.hash(password, salt)
+        } catch (error) {
+            throw new InternalServerErrorException('Something went wrong');
+        }
     }
 
     /**
@@ -32,6 +36,10 @@ export class BcryptService {
      * @returns Promise<boolean> - True if passwords match, false otherwise
      */
     async comparePassword(password: string, hashedPassword: string) {
-        return bcrypt.compare(password, hashedPassword);
+        try {
+            return bcrypt.compare(password, hashedPassword);
+        } catch (error) {
+            throw new InternalServerErrorException('Something went wrong');
+        }
     }
 }

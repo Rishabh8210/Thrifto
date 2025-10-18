@@ -5,9 +5,16 @@ import { ConfigService } from "@nestjs/config";
 export class JWTService {
     private readonly secretKey: string
 
-    constructor( private readonly configService: ConfigService ){
+    constructor( private readonly configService: ConfigService ){    
+        this.secretKey = this.configService.get<string>('server.secretKey', 'super-secret-key')
+    }
+
+    /**
+     * 
+     */
+    async generateJWTToken(payload: any){
         try {
-            this.secretKey = this.configService.get<string>('server.secretKey', 'super_secret_key')
+            
         } catch (error) {
             
         }

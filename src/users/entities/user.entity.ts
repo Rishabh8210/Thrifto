@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Wallets } from 'src/wallets/entities/wallet.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 @Entity()
 export class Users {
     @PrimaryGeneratedColumn()
@@ -21,4 +22,7 @@ export class Users {
 
     @Column({ default: 0 })
     totalAmount: number;
+
+    @OneToMany(() => Wallets, (wallet) => wallet.user, { eager: true })
+    wallets: Wallets[]
 }

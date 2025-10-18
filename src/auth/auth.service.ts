@@ -21,8 +21,8 @@ export class AuthService {
             }
             const isUserRegistered = await this.userService.get(filterUser);
             
-            if(!isUserRegistered){
-                throw new NotFoundException('User not found with these filters')
+            if(isUserRegistered){
+                throw new NotFoundException('User already registered with this email')
             }
 
             const registerUser = await this.userService.create(userDetails);

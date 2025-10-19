@@ -98,8 +98,9 @@ export class WalletsService {
                 throw new NotFoundException('No wallet found');
             }
 
-            wallet.name = walletDetails.name;
-            wallet.amount = walletDetails.amount;
+            wallet.name = walletDetails.name ?? wallet.name;
+            wallet.amount = walletDetails.amount ?? wallet.amount;
+            wallet.description = walletDetails.description ?? wallet.description;
 
             return await this.walletRepositroy.save(wallet);
         } catch (error) {

@@ -12,6 +12,9 @@ export class Wallets {
     @Column({ default: 0 })
     amount: number
 
+    @Column()
+    description: string
+
     @ManyToOne(() => Users, (user) => user.wallets, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
     user: Users
 }

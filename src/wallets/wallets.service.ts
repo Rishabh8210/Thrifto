@@ -108,4 +108,38 @@ export class WalletsService {
             throw new InternalServerErrorException('Failed to update wallet details');
         }
     }
+
+    async deleteWalletDetails(walletId: number) {
+        try {
+            const walletDetails = await this.walletRepositroy.findOne({
+                where: {
+                    id: walletId
+                }
+            });
+
+            if(!walletDetails){
+                throw new NotFoundException("No wallet found");
+            }
+
+            return await this.walletRepositroy.delete({id: walletId});
+        } catch (error) {
+            console.log("Error: Failed to delete wallet details");
+            throw new InternalServerErrorException("Failed to delete wallet details");
+        }
+    }
+
+    async deleteAllWalletDetails() {
+        try {
+            const wallets = await this.userRepository.count();
+            
+            if(!wallets){
+                throw new NotFoundException("No wallets found");
+            }
+
+            return await this.walletRepositroy.delete({});
+        } catch (error) {
+            console.log("Error: Failed to delete all wallets details");
+            throw new InternalServerErrorException("Failed to delete all wallet details")
+        }
+    }
 }

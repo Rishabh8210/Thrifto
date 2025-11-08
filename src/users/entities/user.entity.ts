@@ -1,3 +1,4 @@
+import { Transactions } from 'src/transactions/entities/transaction.entity';
 import { Wallets } from 'src/wallets/entities/wallet.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 @Entity()
@@ -25,4 +26,13 @@ export class Users {
 
     @OneToMany(() => Wallets, (wallet) => wallet.user, { eager: true })
     wallets: Wallets[]
+
+    @OneToMany(() => Transactions, (transaction) => transaction.user, {eager: true})
+    transactions: Transactions[]
+
+    @Column({name: 'created_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP'})
+    createdAt: Date
+
+    @Column({name: 'updated_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP',})
+    updatedAt: Date
 }
